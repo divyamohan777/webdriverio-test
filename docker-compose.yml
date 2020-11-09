@@ -1,0 +1,60 @@
+version: '2'
+services:
+    webdriverio:
+        build: .
+        image: huli/webdriverio
+        depends_on:
+            - chrome
+            - firefox
+        volumes:
+            - ./app:/app
+    hub:
+        image: selenium/hub
+        ports:
+            - 4444:4444
+
+    firefox:
+        image: selenium/node-firefox
+        ports:
+            - 5900
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+        depends_on:
+            - hub
+
+    chrome:
+        image: selenium/node-chrome
+        ports:
+            - 5900
+        environment:
+            - HUB_PORT_4444_TCP_ADDR=hub
+        depends_on:
+            - hub
+  
+    chromedriver:
+        image: blueimp/chromedriver
+        init: true
+        tmpfs: /tmp
+        environment:
+           - DISABLE_X11=false
+           - ENABLE_VNC=true
+           - EXPOSE_X11=true
+        volumes:
+           - ./assets:/home/webdriver/assets:ro
+        ports:
+           - 127.0.0.1:5900:5900   
+
+    wdio:
+        image: blueimp/wdio
+        init: true
+        
+        tmpfs:
+            - /tmp
+        volumes:
+            - .:/opt:ro
+            - ./reports:/opt/reports
+        depends_on:
+            - chromedriver
+            - chrome
+
+    
