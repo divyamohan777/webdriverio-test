@@ -34,6 +34,11 @@ npx wdio run wdio.conf.js
 ```bash
 docker-compose run --rm wdio wdio.conf.js
 ```
+## Area's of improvement
+
+Update docker image matching with enterprise infrastructure (cloud based), if required.
+Strategize and manage Page Object Models
+
 
 ## More on webdriverio
 
