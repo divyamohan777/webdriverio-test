@@ -69,14 +69,14 @@ exports.config = {
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
         // excludeDriverLogs: ['bugreport', 'server'],
     },
-    /*{
-        maxInstances: 2,
+    {
+        maxInstances: 5,
         browserName: 'firefox',
         acceptInsecureCerts: true,
         'moz:firefoxOptions': {
           args: ['-headless', '-disable-gpu', '-disable-sandbox'],
         },
-      }*/],
+      }],
     //
     // ===================
     // Test Configurations
@@ -160,7 +160,7 @@ exports.config = {
             },
         }
         // ... more options
-    }],'chromedriver'],
+    }],'chromedriver','geckodriver'],
 
     
     
